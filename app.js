@@ -93,5 +93,9 @@ function ext(t){return /mp4|aac|m4a/.test(t||'')?'m4a':/ogg/.test(t||'')?'ogg':'
 function files(){var ps=[],out=[];for(var k=0;k<N;k++)(function(k){clipsOf(k).forEach(function(c,j){ps.push(getClip(k,c.n).then(function(b){if(b)out.push(new File([b],NAME+'-P'+String(k+1).padStart(2,'0')+'-audio'+(j+1)+'.'+ext(b.type),{type:b.type}))}))})})(k);
  return Promise.all(ps).then(function(){out.sort(function(a,b){return a.name<b.name?-1:1});out.unshift(new File([compose()],NAME+'-respuestas.txt',{type:'text/plain'}));return out})}
 function compose(){var t='Cuestionario de Studio Roses · '+NAME+'\n';for(var k=0;k<N;k++){var na=clipsOf(k).length;t+='\n'+(k+1)+'. '+Q[k].q+'\n'+(((st.a[k]||'').trim())||(na?'(respondida en audio)':'(sin responder)'))+(na&&(st.a[k]||'').trim()?'\n(+ '+na+' audio'+(na>1?'s':'')+')':'')+'\n'}return t}
+/* aviso si no es Chrome */
+(function(){var ua=navigator.userAgent,isChrome=(/Chrome\//.test(ua)||/CriOS\//.test(ua))&&!/Edg\/|OPR\/|SamsungBrowser|YaBrowser/.test(ua);if(isChrome)return;
+ var d=document.createElement('div');d.className='nochrome';d.setAttribute('role','status');d.innerHTML='<span><b>Abre este cuestionario en Google Chrome</b> para poder responder hablando.</span><button type="button">Copiar enlace</button>';
+ document.body.insertBefore(d,document.body.firstChild);d.querySelector('button').onclick=function(){var b=this;try{navigator.clipboard.writeText(location.href).then(function(){b.textContent='Copiado. Pégalo en Chrome'},function(){b.textContent=location.href})}catch(e){b.textContent=location.href}}})();
 render();
 })();
