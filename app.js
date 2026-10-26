@@ -64,7 +64,7 @@ function drawClips(i){var box=$('#clips');if(!box)return;var list=clipsOf(i);if(
 }
 function render(){drawSegs();var i=st.i;
  if(i<N){var q=Q[i];num.innerHTML=String(i+1).padStart(2,'0')+'<small>/ '+String(N).padStart(2,'0')+'</small>';
-  view.innerHTML='<div class="card in"><span class="tag">Bloque '+q.bn+' de 6 · '+esc(q.b)+'</span><h2 id="qt">'+esc(q.q)+'</h2>'+(q.h?'<p class="hint">'+esc(q.h)+'</p>':'')+
+  view.innerHTML='<div class="card in"><span class="tag">Bloque '+q.bn+' de '+Q[N-1].bn+' · '+esc(q.b)+'</span><h2 id="qt">'+esc(q.q)+'</h2>'+(q.h?'<p class="hint">'+esc(q.h)+'</p>':'')+
   '<div class="ans"><textarea id="ta" aria-labelledby="qt" placeholder="'+(CAN_REC?'Pulsa el micro y habla. Si prefieres, escribe aquí.':'Escribe aquí tu respuesta.')+'"></textarea><div class="abar">'+
   (CAN_REC?'<button type="button" class="mic" id="mic" aria-pressed="false"><span class="dot">'+MIC+'</span><span id="ml">Pulsa y habla</span></button>':'')+
   '<span class="st"><span class="wave" id="wv"><i></i><i></i><i></i><i></i><i></i></span> <span id="sx" aria-live="polite">'+(CAN_REC?'':'Este navegador no deja grabar. Ábrelo en Chrome o Safari, o escribe tu respuesta.')+'</span></span></div><div id="clips" class="clips"></div></div>'+
